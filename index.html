@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="This website show you your ip address and your local time"/>
+    <title>My Ip + My Local Time</title>
+  </head>
+  <body>
+    <div class="app">
+      <div class="ip-con">loading...</div>
+      <div class="time">loading...</div>
+    </div>
+  </body>
+  <script>
+    let prevTimeStamp = 0;
+    const timeElm = document.querySelector(".time")
+    const repeatOften = (timestamp) => {
+        if((timestamp - prevTimeStamp) > 1000){
+            timeElm.textContent = new Date().toLocaleString();
+            prevTimeStamp = timestamp;
+        }
+        requestAnimationFrame(repeatOften);
+    };
+    requestAnimationFrame(repeatOften);
+
+    fetch("https://api.ipify.org")
+      .then((_) => _.text())
+      .then((ip) => {
+        const ipConElm = document.querySelector(".ip-con");
+        ipConElm.textContent = ip;
+      });
+  </script>
+</html>
