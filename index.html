@@ -9,13 +9,14 @@
   </head>
   <body>
     <div class="app">
-      <div class="ip-con">loading...</div>
+      <div class="ip-con">000.000.00.000</div>
       <div class="time">loading...</div>
     </div>
   </body>
   <script>
     let prevTimeStamp = 0;
-    const timeElm = document.querySelector(".time")
+    const timeElm = document.querySelector(".time");
+    timeElm.textContent = new Date().toLocaleString();
     const repeatOften = (timestamp) => {
         if((timestamp - prevTimeStamp) > 1000){
             timeElm.textContent = new Date().toLocaleString();
